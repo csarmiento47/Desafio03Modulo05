@@ -1,20 +1,29 @@
 package com.desafiolatam.desafio3
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import android.view.View
+import com.desafiolatam.desafio3.base.BaseActivity
+import com.desafiolatam.desafio3.base.BaseListener
+import com.desafiolatam.desafio3.databinding.ActivityFirstBinding
 
-class FirstActivity : AppCompatActivity() {
+class FirstActivity : BaseActivity<ActivityFirstBinding>(), BaseListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_first)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        binding.appCompatImageView1.setOnClickListener(this)
+
+    }
+
+    override fun getViewBinding(): ActivityFirstBinding = ActivityFirstBinding.inflate(layoutInflater)
+
+    override fun onClick(view: View?) {
+        if (view != null){
+            when(view.id) {
+                R.id.appCompatImageView1 -> {
+                    startActivity(Intent(this, MainActivity::class.java))
+                }
+            }
         }
     }
 }
